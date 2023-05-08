@@ -6,7 +6,7 @@ interface ButtonProps{
    onClick: () => void;
    disabled?: boolean;
    outline?: boolean;
-
+   children?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -33,7 +33,7 @@ return(
      ${secondary? 'bg-white' : 'bg-sky-500'}
      ${secondary? 'text-black' : 'text-white'}
      ${secondary? 'border-black' : 'border-sky-500'}
-     ${large? 'text-xs' : 'text-md'}
+     ${large? 'text-xs' : 'text-[13px]'}
      ${large? 'px-5' : 'px-5'}
      ${large? 'py-3' : 'py-1'}
      ${outline? 'bg-transparent' : ''}
