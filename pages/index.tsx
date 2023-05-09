@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Header label="Home" />
-      <Form placeholder="What's happening?"></Form>
+      <Form placeholder="What's happening?" children={null}></Form>
       <PostFeed />
     </>
   )
