@@ -7,13 +7,13 @@ import useRegisterModal from "@/hooks/useRegisterModal";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Avatar from './Avatar';
+import usePost from '@/hooks/usePost';
 
 interface FormProps {
   placeholder: string;
   isComment?: boolean;
   postId?: string;
-
-
+  children: React.ReactNode;
 }
 
 
@@ -30,6 +30,8 @@ const Form: React.FC<FormProps> = ({
     const loginModal = useLoginModal();
     const { data: currentUser} = useCurrentUser();
     const { mutate: mutatePosts} = usePosts();
+    const { mutate: mutatePost} = usePost(postId as string);
+
 
     const [body, setBody] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -38,17 +40,20 @@ const Form: React.FC<FormProps> = ({
       try {
         setIsLoading(true);
 
-        await axios.post('/api/posts', { body });
+        const url = isComment ? `/api/comments?postId=${postId}` : '/api/posts'
+
+        await axios.post(url, { body });
         toast.success('Tweet Created');
         setBody('');
         mutatePosts();
+        mutatePost();
         
       } catch (error) {
         toast.error('Something went wrong');
       } finally{
          setIsLoading(false);
       }
-    },[body, mutatePosts])
+    },[body, mutatePosts,isComment,postId,mutatePost],)
 
    return(
 
