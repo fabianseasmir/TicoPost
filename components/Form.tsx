@@ -25,7 +25,8 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({
     placeholder,
     isComment,
-    postId
+    postId,
+    children
 }) =>{
 
     const registerModal = useRegisterModal();
