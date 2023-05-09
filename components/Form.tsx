@@ -13,7 +13,7 @@ interface FormProps {
   placeholder: string;
   isComment?: boolean;
   postId?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 
