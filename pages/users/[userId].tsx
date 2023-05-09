@@ -33,4 +33,4 @@ const UserView = () => {
 
 }
 
-export default userView;
+export default UserView;
