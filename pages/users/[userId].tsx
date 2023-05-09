@@ -6,7 +6,7 @@ import UserBio from "@/components/users/UserBio";
 import useUser from "@/hooks/useUser";
 import PostFeed from "@/components/posts/PostFeed";
 
-const UserView = () => {
+const UserViewComponent = () => {
   const router = useRouter();
   const { userId } = router.query;
 
@@ -33,4 +33,4 @@ const UserView = () => {
 
 }
 
-export default UserView;
+export default UserViewComponent;
