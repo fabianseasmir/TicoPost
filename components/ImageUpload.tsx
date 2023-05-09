@@ -7,6 +7,7 @@ interface DropzoneProps {
   label: string;
   value?: string;
   disabled?: boolean;
+  children?: React.ReactNode;
 }
 
 const ImageUpload: React.FC<DropzoneProps> = ({ onChange, label, value, disabled }) => {
