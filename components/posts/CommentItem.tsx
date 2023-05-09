@@ -7,7 +7,7 @@ interface CommentItemProps{
   data: Record<string, any>
 }
 
-const CommentItem: React.FC<CommentItemProps> = ({data})=>{
+const CommentItem: React.FC<CommentItemProps> = ({data = {}})=>{
   const router = useRouter();
   const goToUser = useCallback((event: any)=>{
     event.stopPropagation();
@@ -23,7 +23,7 @@ const CommentItem: React.FC<CommentItemProps> = ({data})=>{
 
     return formatDistanceToNowStrict(new Date(data.createdAt));
 
-  },[data?.createdAt])
+  },[data.createdAt])
 
     return(
         <div className="border-b-[1px} border-neutral-800 p-5 cursor-pointer hover:bg-neutral-900 transition">

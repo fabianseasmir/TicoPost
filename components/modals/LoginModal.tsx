@@ -66,7 +66,7 @@ const LoginModal = () => {
   const footerContent = (
    <div className="text-neutral-400 text-center mt-4">
        <p className="text-xs">
-          First time using Twitter? 
+          First time using Tico Posts? 
           <span onClick={onToggle} className="text-white cursor-pointer hover:underline p-1"> 
            Create an account
           </span>
