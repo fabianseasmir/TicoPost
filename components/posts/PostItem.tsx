@@ -1,10 +1,11 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import {AiOutlineMessage, AiOutlineHeart} from "react-icons/ai"
+import {AiOutlineMessage,AiFillHeart, AiOutlineHeart} from "react-icons/ai"
 import useLoginModal from "@/hooks/useLoginModal";
 import { formatDistanceToNowStrict } from "date-fns";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useMemo } from "react";
 import Avatar from "../Avatar";
+import useLike from "@/hooks/useLike";
 
 
 interface PostItemProps{
@@ -18,6 +19,7 @@ const PostItem: React.FC<PostItemProps> = ({data = {}, userId})=>{
     const loginModal = useLoginModal();
 
     const { data: currentUser} = useCurrentUser();
+    const { hasLiked, toggleLike} = useLike({postId: data.id, userId});
 
  
 
@@ -34,9 +36,15 @@ const PostItem: React.FC<PostItemProps> = ({data = {}, userId})=>{
 
     const onLike = useCallback((event: any)=>{
         event.stopPropagation();
-        loginModal.onOpen();
 
-    },[loginModal]);
+        if(!currentUser){
+         return loginModal.onOpen();
+        }
+
+        toggleLike();
+    },[loginModal, currentUser,toggleLike]);
+
+    const LikeIcon = hasLiked? AiFillHeart : AiOutlineHeart;
 
     const createdAt = useMemo(()=>{
        if(!data?.createdAt){
@@ -44,6 +52,7 @@ const PostItem: React.FC<PostItemProps> = ({data = {}, userId})=>{
        }
        return formatDistanceToNowStrict(new Date(data.createdAt));
     },[data.createdAt]);
+
 
     return(
       <div onClick={goToPost} 
@@ -72,8 +81,8 @@ const PostItem: React.FC<PostItemProps> = ({data = {}, userId})=>{
                      <p>{data.comments?.length || 0}</p>
                   </div>
                   <div onClick={onLike} className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
-                     <AiOutlineHeart size={20}></AiOutlineHeart>
-                     <p>{data.comments?.length || 0}</p>
+                     <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
+                     <p>{data.likedIds?.length}</p>
                   </div>
              </div>
          </div>
