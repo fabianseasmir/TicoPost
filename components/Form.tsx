@@ -8,6 +8,8 @@ import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Avatar from './Avatar';
 import usePost from '@/hooks/usePost';
+import React from 'react';
+
 
 interface FormProps {
   placeholder: string;
@@ -23,8 +25,7 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({
     placeholder,
     isComment,
-    postId,
-    children
+    postId
 }) =>{
 
     const registerModal = useRegisterModal();
